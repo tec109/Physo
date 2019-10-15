@@ -1,10 +1,20 @@
+import conversion
+
 variables = {}
-unit_types = {}
 
 
-class Data:
+class Variable:
+    def __init__(self, equation, input_variables):
+        self.units_needed = units_needed
+
+    def __init__(self, unit_type):
+        self.is_base_variable = True
+        
+
+
+class DataPoint:
     def __init__(self, units):
-        self.value = 0
+        self.value = 0.0
         self.units = units
 
     def update_value(self, value):
@@ -14,32 +24,36 @@ class Data:
         self.units = units
 
 
-class Equation:
-    pass
-
-
-def add_units():
-    unit_types['time'] = ['seconds', 'minutes', 'hours', 'days']
-    unit_types['distance'] = ['feet', 'meters', 'miles']
-
-
 def add_variables():
+    # work here, figure out how to best do complex units
     variables['acceleration'] = Data(['distance', 'time'])
-    variables['time'] = Data('time')
+    variables['time'] = Data(['time'])
+    variables['distance'] = Data(['distance'])
     variables['velocity_initial'] = Data(['distance', 'time'])
     variables['velocity_final'] = Data(['distance', 'time'])
 
 
-def add_equations():
-    pass
-
-
 def main():
-    add_units()
+    conversion.setup_conversion()
     add_variables()
-    add_equations()
-    dataType = input("What variable of the physics problem is this? ")
-    dataValue = input("What is its value? ")
+
+    print("Hello, welcome to Physo!/n")
+    cont = True
+    while cont:
+        print("Please select an option:")
+        print("a: add variable")
+        print("q: quit Physo")
+        user = input("/n")
+        if user == "a":
+            variable = input("What variable of the physics problem is this?/n")
+            # check to see if variable is in system
+
+            value = input("What is its value?/n")
+
+        elif user == "q":
+            exit()
+        else:
+            print("Please try again!/n")
 
 
 if __name__ == '__main__':
