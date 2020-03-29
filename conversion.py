@@ -1,5 +1,3 @@
-from fractions import Fraction
-
 units = {}
 
 
@@ -30,15 +28,15 @@ class Unit:
 
 def setup_conversion():
     time = Unit('time', 'seconds')
-    time.add_variation('minutes', Fraction(1, 60))
-    time.add_variation('hours', Fraction(1, 3600))
-    time.add_variation('days', Fraction(1, 86400))
+    time.add_variation('minutes', 60)
+    time.add_variation('hours', 3600)
+    time.add_variation('days', 86400)
     units['time'] = time
 
     distance = Unit('distance', 'meters')
-    distance.add_variation('feet', Fraction(1, 0.3048))
-    distance.add_variation('miles', Fraction(1, 1609.344))
-    distance.add_variation('kilometer', Fraction(1, 1000))
+    distance.add_variation('feet', 0.3048)
+    distance.add_variation('miles', 1609.344)
+    distance.add_variation('kilometer', 1000)
     units['distance'] = distance
 
 
@@ -55,9 +53,13 @@ def convert(unit_type, value, current_unit, end_unit):
         working_unit = units[unit_type]
 
         if current_unit != working_unit.get_standard():
-            result = result / working_unit.get_conversion(current_unit)
+            result = result * working_unit.get_conversion(current_unit)
 
-        return result * working_unit.get_conversion(end_unit)
+        return result / working_unit.get_conversion(end_unit)
     else:
         print("Units are not valid")
         return 0
+
+
+def parse(unit_string):
+    

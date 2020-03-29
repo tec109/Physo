@@ -1,41 +1,11 @@
 import conversion
-
-variables = {}
-
-
-class Variable:
-    def __init__(self, equation, input_variables):
-        self.units_needed = units_needed
-
-    def __init__(self, unit_type):
-        self.is_base_variable = True
-        
-
-
-class DataPoint:
-    def __init__(self, units):
-        self.value = 0.0
-        self.units = units
-
-    def update_value(self, value):
-        self.value = value
-
-    def update_units(self, units):
-        self.units = units
-
-
-def add_variables():
-    # work here, figure out how to best do complex units
-    variables['acceleration'] = Data(['distance', 'time'])
-    variables['time'] = Data(['time'])
-    variables['distance'] = Data(['distance'])
-    variables['velocity_initial'] = Data(['distance', 'time'])
-    variables['velocity_final'] = Data(['distance', 'time'])
+import equations
 
 
 def main():
     conversion.setup_conversion()
-    add_variables()
+    equations.add_variables()
+    equations.add_equations()
 
     print("Hello, welcome to Physo!/n")
     cont = True
@@ -51,9 +21,10 @@ def main():
             value = input("What is its value?/n")
 
         elif user == "q":
-            exit()
+            cont = False
         else:
             print("Please try again!/n")
+    exit()
 
 
 if __name__ == '__main__':
