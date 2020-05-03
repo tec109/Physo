@@ -55,6 +55,9 @@ def convert(unit_type, value, current_unit, end_unit):
         if current_unit != working_unit.get_standard():
             result = result * working_unit.get_conversion(current_unit)
 
+        if end_unit == working_unit.get_standard():
+            return result
+
         return result / working_unit.get_conversion(end_unit)
     else:
         print("Units are not valid")
